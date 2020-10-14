@@ -1,0 +1,6 @@
+{
+  "extends": "@braisc",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}
