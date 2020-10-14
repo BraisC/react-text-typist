@@ -16,6 +16,6 @@ export default {
       sourcemap: true,
     },
   ],
-  plugins: [sass({ insert: true }), typescript({ objectHashIgnoreUnknownHack: true })],
+  plugins: [sass({ insert: true }), typescript()],
   external: ['react', 'react-dom'],
 };

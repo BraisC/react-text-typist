@@ -2,5 +2,8 @@
   "extends": "@braisc",
   "parserOptions": {
     "project": "./tsconfig.json"
+  },
+  "rules": {
+    "object-curly-newline": 0
   }
 }
