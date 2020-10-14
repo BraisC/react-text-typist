@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
-import './Typer.css';
+import './styles.scss';
 
 interface TyperProps {
   sentences: string[];
