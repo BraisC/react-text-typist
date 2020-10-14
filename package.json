@@ -1,7 +1,7 @@
 {
   "name": "react-text-typist",
   "version": "1.0.0",
-  "description": "",
+  "description": "A React component that imitates human typing on a keyboard",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "files": [
@@ -12,8 +12,8 @@
     "start": "rollup -c -w"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Brais Cao <braiscao.dev@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/eslint-parser": "^7.11.5",
@@ -49,5 +49,12 @@
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "prop-types": "^15.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BraisC/react-text-typist"
+  },
+  "bugs": {
+    "url": "https://github.com/BraisC/react-text-typist/issues"
   }
 }
