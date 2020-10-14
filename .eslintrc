@@ -4,6 +4,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "object-curly-newline": 0
+    "object-curly-newline": 0,
+    "react/destructuring-assignment": 0
   }
 }

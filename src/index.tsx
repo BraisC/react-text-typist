@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 
 import './Typer.css';
 
-const Typer = (props) => {
+interface TyperProps {
+  sentences: string[];
+  className?: string;
+  cursorColor?: string;
+}
+
+const Typer: React.FC<TyperProps> = (props: TyperProps) => {
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
@@ -14,7 +20,7 @@ const Typer = (props) => {
   const refLoopNum = useRef(loopNum);
   const refTypingSpeed = useRef(typingSpeed);
 
-  const refTimer = useRef();
+  const refTimer = useRef(0);
   const refIsGoingToDelete = useRef(false);
 
   refText.current = text;
@@ -73,11 +79,13 @@ const Typer = (props) => {
 };
 
 Typer.propTypes = {
+  className: PropTypes.string, // so it is compatible with styled-components
   cursorColor: PropTypes.string,
-  sentences: PropTypes.array.isRequired,
+  sentences: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 Typer.defaultProps = {
+  className: '',
   cursorColor: '#000000',
 };
 
