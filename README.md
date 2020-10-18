@@ -1,4 +1,6 @@
-# React Text Typist
+<p align="center">
+<img src="https://github.com/BraisC/react-text-typist/blob/master/banner-gif.gif?raw=true" /> <h1 align="center">React-Text-Typist</h1>
+</p>
 
 [![npm](https://img.shields.io/npm/v/react-text-typist?logo=npm&style=flat-square)](https://www.npmjs.com/package/react-text-typist)
 [![npm size](https://img.shields.io/bundlephobia/min/react-text-typist?label=size&logo=npm&style=flat-square)](https://www.npmjs.com/package/react-text-typist)
