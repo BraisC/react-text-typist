@@ -7,7 +7,10 @@ interface TyperProps {
   sentences: string[];
   className?: string;
   cursorColor?: string;
-  cursor?: boolean;
+  showCursor?: boolean;
+  writeSpeed?: number;
+  deleteSpeed?: number;
+  pauseTime?: number;
   loop?: boolean;
 }
 
@@ -41,18 +44,16 @@ const Typer: React.FC<TyperProps> = (props: TyperProps) => {
         : fullText.substring(0, refText.current.length + 1)
     );
 
-    // setTypingSpeed(refIsDeleting.current ? 30 : 100);
-
     if (!refIsDeleting.current && refText.current === fullText && !refIsGoingToDelete.current) {
       refIsGoingToDelete.current = true;
       setTimeout(() => {
         setIsDeleting(true);
-        setTypingSpeed(30);
+        setTypingSpeed(props.deleteSpeed!);
         refIsGoingToDelete.current = false;
-      }, 2000);
+      }, props.pauseTime);
     } else if (refIsDeleting.current && refText.current === '') {
       setIsDeleting(false);
-      setTypingSpeed(80);
+      setTypingSpeed(props.writeSpeed!);
       setLoopNum(refLoopNum.current + 1);
     }
 
@@ -60,7 +61,7 @@ const Typer: React.FC<TyperProps> = (props: TyperProps) => {
       if (refIsGoingToDelete.current) {
         setTimeout(() => {
           refTimer.current = setTimeout(handleType, refTypingSpeed.current);
-        }, 2000);
+        }, props.pauseTime);
       } else {
         refTimer.current = setTimeout(handleType, refTypingSpeed.current);
       }
@@ -78,7 +79,7 @@ const Typer: React.FC<TyperProps> = (props: TyperProps) => {
 
       <span
         className={`cursor ${props.className}`}
-        style={{ opacity: props.cursor ? 1 : 0, color: props.cursorColor }}
+        style={{ visibility: props.showCursor ? 'visible' : 'hidden', color: props.cursorColor }}
       >
         |
       </span>
@@ -90,14 +91,20 @@ Typer.propTypes = {
   className: PropTypes.string, // so it is compatible with styled-components
   cursorColor: PropTypes.string,
   sentences: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  cursor: PropTypes.bool,
+  showCursor: PropTypes.bool,
+  writeSpeed: PropTypes.number,
+  deleteSpeed: PropTypes.number,
+  pauseTime: PropTypes.number,
   loop: PropTypes.bool,
 };
 
 Typer.defaultProps = {
   className: '',
   cursorColor: '#000000',
-  cursor: true,
+  showCursor: true,
+  writeSpeed: 80,
+  deleteSpeed: 30,
+  pauseTime: 2000,
   loop: true,
 };
 
