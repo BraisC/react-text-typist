@@ -11,7 +11,6 @@
 [![dependency](https://img.shields.io/npm/dependency-version/react-text-typist/peer/react?style=flat-square)](https://reactjs.org/)
 [![](https://img.shields.io/badge/Made%20for-React-61bdfb?logo=react&style=flat-square&logoColor=adbfb)](https://reactjs.org/)
 
-
 A simple React component to create typing animations with multiple sentences.
 
 ## Install
@@ -50,7 +49,7 @@ Typist accepts some props to customize the component behaviour:
 |   cursorColor    |    string     |                    |              Color of cursor               |    no    |
 |    showCursor    |    boolean    |        true        |            Hide or show cursor             |    no    |
 |    writeSpeed    |    number     |      80 (ms)       |  Typing speed (ms between each character)  |    no    |
-|   deleteSpeed    |    number     |      30 (ms)       |               Deleting speed               |    no    |
+|  deletingSpeed   |    number     |      30 (ms)       | Deleting speed (ms between each character) |    no    |
 |    pauseTime     |    number     |      1000(ms)      |          Pause between sentences           |    no    |
 |    startDelay    |    number     |       0(ms)        |         Delay before start typing          |    no    |
 |   cursorDelay    |    number     | same as startDelay | Delay before showing cursor for first time |    no    |

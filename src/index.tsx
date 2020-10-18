@@ -15,7 +15,7 @@ interface TyperProps {
   hideCursorOnFinish?: boolean;
   cursorSmooth?: boolean;
   typingSpeed?: number;
-  deleteSpeed?: number;
+  deletingSpeed?: number;
   pauseTime?: number;
   loop?: boolean;
   style?: React.CSSProperties;
@@ -33,7 +33,7 @@ const Typer: React.FC<TyperProps> = ({
   hideCursorOnFinish = false,
   cursorSmooth = false,
   typingSpeed = 80,
-  deleteSpeed = 30,
+  deletingSpeed = 30,
   pauseTime = 1000,
   loop = true,
   style = {},
@@ -71,7 +71,7 @@ const Typer: React.FC<TyperProps> = ({
       refIsGoingToDelete.current = true;
       setTimeout(() => {
         setIsDeleting(true);
-        setWritingSpeed(deleteSpeed);
+        setWritingSpeed(deletingSpeed);
         refIsGoingToDelete.current = false;
       }, pauseTime);
     } else if (refIsDeleting.current && refText.current === '') {
@@ -91,7 +91,7 @@ const Typer: React.FC<TyperProps> = ({
     } else {
       refIsFinished.current = true;
     }
-  }, [deleteSpeed, loop, pauseTime, typingSpeed, sentences]);
+  }, [deletingSpeed, loop, pauseTime, typingSpeed, sentences]);
 
   useEffect(() => {
     setTimeout(() => {
