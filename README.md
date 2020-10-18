@@ -48,6 +48,7 @@ Typist accepts some props to customize the component behaviour:
 | cursorClassName  |    string     |                    |       Classname to customize cursor        |    no    |
 | cursorBlinkSpeed |    string     |      700 (ms)      |     Duration of cursor blink animation     |    no    |
 |   cursorColor    |    string     |                    |              Color of cursor               |    no    |
+|   cursorSmooth   |    boolean    |       false        |          Cursor smooth animation           |    no    |
 |    showCursor    |    boolean    |        true        |            Hide or show cursor             |    no    |
 |    writeSpeed    |    number     |      80 (ms)       |  Typing speed (ms between each character)  |    no    |
 |  deletingSpeed   |    number     |      30 (ms)       | Deleting speed (ms between each character) |    no    |
