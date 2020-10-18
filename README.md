@@ -10,7 +10,7 @@ npm install react-text-typist --save
 
 ## Demos
 
-- <a href="https://react-text-typist.braiscao.dev" target="_blank">Demo Website</a>
+### <a href="https://react-text-typist.braiscao.dev" target="_blank">Demo Website</a>
 
 ## Basic Usage
 
@@ -29,25 +29,52 @@ export default App() => {
 
 Typist accepts some props to customize the component behaviour:
 
-|     Property     |     Type      |      Default       | Required |
-| :--------------: | :-----------: | :----------------: | :------: |
-|    sentences     |   string[]    |                    |   yes    |
-|    className     |    string     |                    |    no    |
-| cursorClassName  |    string     |                    |    no    |
-| cursorBlinkSpeed |    string     |      700 (ms)      |    no    |
-|   cursorColor    |    string     |                    |    no    |
-|    showCursor    |    boolean    |        true        |    no    |
-|    writeSpeed    |    number     |      80 (ms)       |    no    |
-|   deleteSpeed    |    number     |      30 (ms)       |    no    |
-|    pauseTime     |    number     |      2000(ms)      |    no    |
-|    startDelay    |    number     |       0(ms)        |    no    |
-|   cursorDelay    |    number     | same as startDelay |    no    |
-|       loop       |    boolean    |        true        |    no    |
-|       loop       | CSSProperties |         {}         |    no    |
+|     Property     |     Type      |      Default       |                Description                 | Required |
+| :--------------: | :-----------: | :----------------: | :----------------------------------------: | :------: |
+|    sentences     |   string[]    |                    |         Array of sentences to type         |   yes    |
+|    className     |    string     |                    |      Classname to customize component      |    no    |
+| cursorClassName  |    string     |                    |       Classname to customize cursor        |    no    |
+| cursorBlinkSpeed |    string     |      700 (ms)      |     Duration of cursor blink animation     |    no    |
+|   cursorColor    |    string     |                    |              Color of cursor               |    no    |
+|    showCursor    |    boolean    |        true        |            Hide or show cursor             |    no    |
+|    writeSpeed    |    number     |      80 (ms)       |  Typing speed (ms between each character)  |    no    |
+|   deleteSpeed    |    number     |      30 (ms)       |               Deleting speed               |    no    |
+|    pauseTime     |    number     |      1000(ms)      |          Pause between sentences           |    no    |
+|    startDelay    |    number     |       0(ms)        |         Delay before start typing          |    no    |
+|   cursorDelay    |    number     | same as startDelay | Delay before showing cursor for first time |    no    |
+|       loop       |    boolean    |        true        |      Choose if you want infinite loop      |    no    |
+|      style       | CSSProperties |         {}         |    Inline CSS to apply to the component    |    no    |
 
 ## Customization
 
-You can apply your own class to the text using the 'className' prop. Also you can select the cursor in CSS via the 'typist-cursor' class or you can apply your own class using the 'cursorClassName' prop.
+You can apply your own class to the text and the cursor using the 'className' prop. Also you can select the cursor in CSS via the 'typist-cursor' class or you can apply your own class just to the cursor using the 'cursorClassName' prop.
+
+```jsx
+export default App() => {
+    return (
+      <StyledTypist className={'myTypist'} cursorClassName={'myCursor'} sentences={['First Sentence', 'Second Sentence', 'Third Sentence']} loop={false} />
+    );
+}
+```
+
+```css
+/* Default cursor class */
+.typist-cursor {
+  font-size: 16px;
+  color: red;
+}
+/* This will apply to text and cursor */
+.myTypist {
+  font-size: 16px;
+  color: red;
+}
+
+/* This will apply only to cursor */
+.myCursor {
+  font-size: 16px;
+  color: red;
+}
+```
 
 The component is also compatible with libraries like 'styled-components':
 

@@ -14,7 +14,7 @@ interface TyperProps {
   showCursor?: boolean;
   hideCursorOnFinish?: boolean;
   cursorSmooth?: boolean;
-  writeSpeed?: number;
+  typingSpeed?: number;
   deleteSpeed?: number;
   pauseTime?: number;
   loop?: boolean;
@@ -32,21 +32,21 @@ const Typer: React.FC<TyperProps> = ({
   showCursor = true,
   hideCursorOnFinish = false,
   cursorSmooth = false,
-  writeSpeed = 80,
+  typingSpeed = 80,
   deleteSpeed = 30,
-  pauseTime = 2000,
+  pauseTime = 1000,
   loop = true,
   style = {},
 }: TyperProps) => {
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(writeSpeed);
+  const [writingSpeed, setWritingSpeed] = useState(typingSpeed);
 
   const refText = useRef(text);
   const refIsDeleting = useRef(isDeleting);
   const refLoopNum = useRef(loopNum);
-  const refTypingSpeed = useRef(typingSpeed);
+  const refWritingSpeed = useRef(writingSpeed);
 
   const refTimer = useRef(0);
   const refIsGoingToDelete = useRef(false);
@@ -55,7 +55,7 @@ const Typer: React.FC<TyperProps> = ({
   refText.current = text;
   refIsDeleting.current = isDeleting;
   refLoopNum.current = loopNum;
-  refTypingSpeed.current = typingSpeed;
+  refWritingSpeed.current = writingSpeed;
 
   const handleType = useCallback(() => {
     const i = refLoopNum.current % sentences.length;
@@ -71,27 +71,27 @@ const Typer: React.FC<TyperProps> = ({
       refIsGoingToDelete.current = true;
       setTimeout(() => {
         setIsDeleting(true);
-        setTypingSpeed(deleteSpeed);
+        setWritingSpeed(deleteSpeed);
         refIsGoingToDelete.current = false;
       }, pauseTime);
     } else if (refIsDeleting.current && refText.current === '') {
       setIsDeleting(false);
-      setTypingSpeed(writeSpeed);
+      setWritingSpeed(typingSpeed);
       setLoopNum(refLoopNum.current + 1);
     }
 
     if (loop || i !== sentences.length - 1 || refText.current.length !== fullText.length) {
       if (refIsGoingToDelete.current) {
         setTimeout(() => {
-          refTimer.current = setTimeout(handleType, refTypingSpeed.current);
+          refTimer.current = setTimeout(handleType, refWritingSpeed.current);
         }, pauseTime);
       } else {
-        refTimer.current = setTimeout(handleType, refTypingSpeed.current);
+        refTimer.current = setTimeout(handleType, refWritingSpeed.current);
       }
     } else {
       refIsFinished.current = true;
     }
-  }, [deleteSpeed, loop, pauseTime, writeSpeed, sentences]);
+  }, [deleteSpeed, loop, pauseTime, typingSpeed, sentences]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -126,7 +126,7 @@ const Typer: React.FC<TyperProps> = ({
   cursorColor: PropTypes.string,
   sentences: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   showCursor: PropTypes.bool,
-  writeSpeed: PropTypes.number,
+  typingSpeed: PropTypes.number,
   deleteSpeed: PropTypes.number,
   pauseTime: PropTypes.number,
   loop: PropTypes.bool,
@@ -136,7 +136,7 @@ Typer.defaultProps = {
   className: '',
   cursorColor: '#000000',
   showCursor: true,
-  writeSpeed: 80,
+  typingSpeed: 80,
   deleteSpeed: 30,
   pauseTime: 2000,
   loop: true,
