@@ -1,24 +1,47 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import './styles.scss';
 
 interface TyperProps {
   sentences: string[];
+  startDelay?: number;
+  cursorDelay?: number;
   className?: string;
+  cursorClassName?: string;
   cursorColor?: string;
+  cursorBlinkSpeed?: number;
   showCursor?: boolean;
+  hideCursorOnFinish?: boolean;
+  cursorSmooth?: boolean;
   writeSpeed?: number;
   deleteSpeed?: number;
   pauseTime?: number;
   loop?: boolean;
+  style?: React.CSSProperties;
 }
 
-const Typer: React.FC<TyperProps> = (props: TyperProps) => {
+const Typer: React.FC<TyperProps> = ({
+  sentences,
+  startDelay = 0,
+  cursorDelay = startDelay,
+  className = '',
+  cursorClassName = '',
+  cursorColor = '',
+  cursorBlinkSpeed = 700,
+  showCursor = true,
+  hideCursorOnFinish = false,
+  cursorSmooth = false,
+  writeSpeed = 80,
+  deleteSpeed = 30,
+  pauseTime = 2000,
+  loop = true,
+  style = {},
+}: TyperProps) => {
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(80);
+  const [typingSpeed, setTypingSpeed] = useState(writeSpeed);
 
   const refText = useRef(text);
   const refIsDeleting = useRef(isDeleting);
@@ -27,6 +50,7 @@ const Typer: React.FC<TyperProps> = (props: TyperProps) => {
 
   const refTimer = useRef(0);
   const refIsGoingToDelete = useRef(false);
+  const refIsFinished = useRef(false);
 
   refText.current = text;
   refIsDeleting.current = isDeleting;
@@ -34,7 +58,6 @@ const Typer: React.FC<TyperProps> = (props: TyperProps) => {
   refTypingSpeed.current = typingSpeed;
 
   const handleType = useCallback(() => {
-    const { sentences } = props;
     const i = refLoopNum.current % sentences.length;
     const fullText = sentences[i];
 
@@ -48,46 +71,57 @@ const Typer: React.FC<TyperProps> = (props: TyperProps) => {
       refIsGoingToDelete.current = true;
       setTimeout(() => {
         setIsDeleting(true);
-        setTypingSpeed(props.deleteSpeed!);
+        setTypingSpeed(deleteSpeed);
         refIsGoingToDelete.current = false;
-      }, props.pauseTime);
+      }, pauseTime);
     } else if (refIsDeleting.current && refText.current === '') {
       setIsDeleting(false);
-      setTypingSpeed(props.writeSpeed!);
+      setTypingSpeed(writeSpeed);
       setLoopNum(refLoopNum.current + 1);
     }
 
-    if (props.loop || i !== sentences.length - 1 || refText.current.length !== fullText.length) {
+    if (loop || i !== sentences.length - 1 || refText.current.length !== fullText.length) {
       if (refIsGoingToDelete.current) {
         setTimeout(() => {
           refTimer.current = setTimeout(handleType, refTypingSpeed.current);
-        }, props.pauseTime);
+        }, pauseTime);
       } else {
         refTimer.current = setTimeout(handleType, refTypingSpeed.current);
       }
+    } else {
+      refIsFinished.current = true;
     }
-  }, [props]);
+  }, [deleteSpeed, loop, pauseTime, writeSpeed, sentences]);
 
   useEffect(() => {
-    handleType();
+    setTimeout(() => {
+      handleType();
+    }, startDelay);
     return () => clearTimeout(refTimer.current);
-  }, [handleType]);
+  }, [handleType, startDelay]);
 
   return (
-    <>
-      <span className={props.className}>{text}</span>
-
-      <span
-        className={`cursor ${props.className}`}
-        style={{ visibility: props.showCursor ? 'visible' : 'hidden', color: props.cursorColor }}
-      >
-        |
-      </span>
-    </>
+    <span style={style}>
+      <span className={className}>{text}</span>
+      {!(refIsFinished.current && hideCursorOnFinish) && (
+        <span
+          className={`typist-cursor ${`${cursorClassName} ${className}`}`}
+          style={{
+            opacity: 0,
+            visibility: showCursor ? 'visible' : 'hidden',
+            color: cursorColor,
+            animation: `blink ${cursorBlinkSpeed}ms ${cursorSmooth ? '' : 'steps(1)'} infinite`,
+            animationDelay: `${cursorDelay}ms`,
+          }}
+        >
+          |
+        </span>
+      )}
+    </span>
   );
 };
 
-Typer.propTypes = {
+/* Typer.propTypes = {
   className: PropTypes.string, // so it is compatible with styled-components
   cursorColor: PropTypes.string,
   sentences: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
@@ -106,6 +140,6 @@ Typer.defaultProps = {
   deleteSpeed: 30,
   pauseTime: 2000,
   loop: true,
-};
+}; */
 
 export default Typer;
