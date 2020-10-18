@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "start": "rollup -c -w"
+    "start": "rollup -c -w",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [],
   "author": "Brais Cao <braiscao.dev@gmail.com>",
