@@ -5,6 +5,7 @@
 [![npm](https://img.shields.io/npm/v/react-text-typist?logo=npm&style=flat-square)](https://www.npmjs.com/package/react-text-typist)
 [![npm size](https://img.shields.io/bundlephobia/min/react-text-typist?label=size&logo=npm&style=flat-square)](https://www.npmjs.com/package/react-text-typist)
 [![npm type definitions](https://img.shields.io/npm/types/react-text-typist?logo=npm&style=flat-square)](https://www.npmjs.com/package/react-text-typist)
+[![npm downloads](https://img.shields.io/npm/dw/react-text-typing?logo=npm&style=flat-square)](https://www.npmjs.com/package/react-text-typist)
 ![github last commit](https://img.shields.io/github/last-commit/BraisC/react-text-typist?logo=github&style=flat-square)
 ![github contributors](https://img.shields.io/github/contributors/braisc/react-text-typist?logo=github&style=flat-square)
 ![](https://img.shields.io/badge/PRs-Welcome-brightgreen?logo=github&style=flat-square&logoColor=adbfb)
