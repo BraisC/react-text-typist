@@ -56,7 +56,7 @@ const Typer: React.FC<TyperProps> = (props: TyperProps) => {
       setLoopNum(refLoopNum.current + 1);
     }
 
-    if (props.loop === true || (props.loop === false && refLoopNum.current < 1)) {
+    if (props.loop || i !== sentences.length - 1 || refText.current.length !== fullText.length) {
       if (refIsGoingToDelete.current) {
         setTimeout(() => {
           refTimer.current = setTimeout(handleType, refTypingSpeed.current);
@@ -75,11 +75,13 @@ const Typer: React.FC<TyperProps> = (props: TyperProps) => {
   return (
     <>
       <span className={props.className}>{text}</span>
-      {props.cursor && (
-        <span className={`cursor ${props.className}`} style={{ color: props.cursorColor }}>
-          |
-        </span>
-      )}
+
+      <span
+        className={`cursor ${props.className}`}
+        style={{ opacity: props.cursor ? 1 : 0, color: props.cursorColor }}
+      >
+        |
+      </span>
     </>
   );
 };
