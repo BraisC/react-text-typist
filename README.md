@@ -1,5 +1,10 @@
 # React Text Typist
 
+![npm](https://img.shields.io/npm/v/react-text-typist?logo=npm&style=flat-square)
+![npm size](https://img.shields.io/bundlephobia/min/react-text-typist?label=size&logo=npm&style=flat-square)
+![npm downloads](https://img.shields.io/npm/dw/react-text-typist?logo=npm&style=flat-square)
+
+
 A simple React component to create typing animations with multiple sentences.
 
 ## Install
