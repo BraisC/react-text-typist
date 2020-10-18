@@ -1,12 +1,12 @@
 # React Text Typist
 
-![npm](https://img.shields.io/npm/v/react-text-typist?logo=npm&style=flat-square)
-![npm size](https://img.shields.io/bundlephobia/min/react-text-typist?label=size&logo=npm&style=flat-square)
-![npm type definitions](https://img.shields.io/npm/types/react-text-typist?logo=npm&style=flat-square)
+[![npm](https://img.shields.io/npm/v/react-text-typist?logo=npm&style=flat-square)](https://www.npmjs.com/package/react-text-typist)
+[![npm size](https://img.shields.io/bundlephobia/min/react-text-typist?label=size&logo=npm&style=flat-square)](https://www.npmjs.com/package/react-text-typist)
+[![npm type definitions](https://img.shields.io/npm/types/react-text-typist?logo=npm&style=flat-square)](https://www.npmjs.com/package/react-text-typist)
 ![github last commit](https://img.shields.io/github/last-commit/BraisC/react-text-typist?logo=github&style=flat-square)
 ![github contributors](https://img.shields.io/github/contributors/braisc/react-text-typist?logo=github&style=flat-square)
-![dependency](https://img.shields.io/npm/dependency-version/react-text-typist/peer/react?style=flat-square)
-![](https://img.shields.io/badge/Made%20for-React-61bdfb?logo=react&style=flat-square&logoColor=adbfb)
+[![dependency](https://img.shields.io/npm/dependency-version/react-text-typist/peer/react?style=flat-square)](https://reactjs.org/)
+[![](https://img.shields.io/badge/Made%20for-React-61bdfb?logo=react&style=flat-square&logoColor=adbfb)](https://reactjs.org/)
 
 
 A simple React component to create typing animations with multiple sentences.
