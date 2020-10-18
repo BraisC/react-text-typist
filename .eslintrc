@@ -5,6 +5,7 @@
   },
   "rules": {
     "object-curly-newline": 0,
-    "react/destructuring-assignment": 0
+    "react/destructuring-assignment": 0,
+    "react/require-default-props": [1, { "ignoreFunctionalComponents": true }]
   }
 }
