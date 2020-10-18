@@ -7,6 +7,8 @@ interface TyperProps {
   sentences: string[];
   className?: string;
   cursorColor?: string;
+  cursor?: boolean;
+  loop?: boolean;
 }
 
 const Typer: React.FC<TyperProps> = (props: TyperProps) => {
@@ -54,12 +56,14 @@ const Typer: React.FC<TyperProps> = (props: TyperProps) => {
       setLoopNum(refLoopNum.current + 1);
     }
 
-    if (refIsGoingToDelete.current) {
-      setTimeout(() => {
+    if (props.loop === true || (props.loop === false && refLoopNum.current < 1)) {
+      if (refIsGoingToDelete.current) {
+        setTimeout(() => {
+          refTimer.current = setTimeout(handleType, refTypingSpeed.current);
+        }, 2000);
+      } else {
         refTimer.current = setTimeout(handleType, refTypingSpeed.current);
-      }, 2000);
-    } else {
-      refTimer.current = setTimeout(handleType, refTypingSpeed.current);
+      }
     }
   }, [props]);
 
@@ -71,9 +75,11 @@ const Typer: React.FC<TyperProps> = (props: TyperProps) => {
   return (
     <>
       <span className={props.className}>{text}</span>
-      <span className={`cursor ${props.className}`} style={{ color: props.cursorColor }}>
-        |
-      </span>
+      {props.cursor && (
+        <span className={`cursor ${props.className}`} style={{ color: props.cursorColor }}>
+          |
+        </span>
+      )}
     </>
   );
 };
@@ -82,11 +88,15 @@ Typer.propTypes = {
   className: PropTypes.string, // so it is compatible with styled-components
   cursorColor: PropTypes.string,
   sentences: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  cursor: PropTypes.bool,
+  loop: PropTypes.bool,
 };
 
 Typer.defaultProps = {
   className: '',
   cursorColor: '#000000',
+  cursor: true,
+  loop: true,
 };
 
 export default Typer;
