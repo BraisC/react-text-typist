@@ -65,7 +65,7 @@ You can apply your own class to the text and the cursor using the 'className' pr
 ```jsx
 export default App() => {
     return (
-      <StyledTypist className={'myTypist'} cursorClassName={'myCursor'} sentences={['First Sentence', 'Second Sentence', 'Third Sentence']} loop={false} />
+      <Typist className={'myTypist'} cursorClassName={'myCursor'} sentences={['First Sentence', 'Second Sentence', 'Third Sentence']} loop={false} />
     );
 }
 ```
