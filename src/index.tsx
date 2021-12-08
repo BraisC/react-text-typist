@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 // import PropTypes from 'prop-types';
 
 import './styles.scss';
@@ -42,6 +42,7 @@ const Typer: React.FC<TyperProps> = ({
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [writingSpeed, setWritingSpeed] = useState(typingSpeed);
+  const mountedRef = useRef(false);
 
   const refText = useRef(text);
   const refIsDeleting = useRef(isDeleting);
@@ -49,13 +50,30 @@ const Typer: React.FC<TyperProps> = ({
   const refWritingSpeed = useRef(writingSpeed);
 
   const refTimer = useRef(0);
+  const timer1 = useRef(0);
+  const timer2 = useRef(0);
+  const timer3 = useRef(0);
   const refIsGoingToDelete = useRef(false);
   const refIsFinished = useRef(false);
+
+  clearTimeout(refTimer.current);
 
   refText.current = text;
   refIsDeleting.current = isDeleting;
   refLoopNum.current = loopNum;
   refWritingSpeed.current = writingSpeed;
+
+  useEffect(() => {
+    mountedRef.current = true;
+
+    return () => {
+      mountedRef.current = false;
+      clearTimeout(refTimer.current);
+      clearTimeout(timer1.current);
+      clearTimeout(timer2.current);
+      clearTimeout(timer3.current);
+    };
+  }, []);
 
   const handleType = useCallback(() => {
     const i = refLoopNum.current % sentences.length;
@@ -69,7 +87,7 @@ const Typer: React.FC<TyperProps> = ({
 
     if (!refIsDeleting.current && refText.current === fullText && !refIsGoingToDelete.current) {
       refIsGoingToDelete.current = true;
-      setTimeout(() => {
+      timer1.current = setTimeout(() => {
         setIsDeleting(true);
         setWritingSpeed(deletingSpeed);
         refIsGoingToDelete.current = false;
@@ -82,7 +100,7 @@ const Typer: React.FC<TyperProps> = ({
 
     if (loop || i !== sentences.length - 1 || refText.current.length !== fullText.length) {
       if (refIsGoingToDelete.current) {
-        setTimeout(() => {
+        timer2.current = setTimeout(() => {
           refTimer.current = setTimeout(handleType, refWritingSpeed.current);
         }, pauseTime);
       } else {
@@ -94,11 +112,24 @@ const Typer: React.FC<TyperProps> = ({
   }, [deletingSpeed, loop, pauseTime, typingSpeed, sentences]);
 
   useEffect(() => {
-    setTimeout(() => {
+    timer3.current = setTimeout(() => {
+      if (!mountedRef.current) {
+        return;
+      }
       handleType();
     }, startDelay);
-    return () => clearTimeout(refTimer.current);
   }, [handleType, startDelay]);
+
+  const styledSpan = useMemo(
+    () => ({
+        opacity: 0,
+        visibility: showCursor ? 'visible' : 'hidden',
+        color: cursorColor,
+        animation: `blink ${cursorBlinkSpeed}ms ${cursorSmooth ? '' : 'steps(1)'} infinite`,
+        animationDelay: `${cursorDelay}ms`,
+      } as React.CSSProperties),
+      [cursorBlinkSpeed, cursorColor, cursorDelay, cursorSmooth, showCursor]
+  );
 
   return (
     <span style={style}>
@@ -106,13 +137,7 @@ const Typer: React.FC<TyperProps> = ({
       {!(refIsFinished.current && hideCursorOnFinish) && (
         <span
           className={`typist-cursor ${`${cursorClassName} ${className}`}`}
-          style={{
-            opacity: 0,
-            visibility: showCursor ? 'visible' : 'hidden',
-            color: cursorColor,
-            animation: `blink ${cursorBlinkSpeed}ms ${cursorSmooth ? '' : 'steps(1)'} infinite`,
-            animationDelay: `${cursorDelay}ms`,
-          }}
+          style={styledSpan}
         >
           |
         </span>
