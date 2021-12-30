@@ -19,6 +19,7 @@ interface TyperProps {
   pauseTime?: number;
   loop?: boolean;
   style?: React.CSSProperties;
+  defaultText?: string;
 }
 
 const Typer: React.FC<TyperProps> = ({
@@ -37,8 +38,9 @@ const Typer: React.FC<TyperProps> = ({
   pauseTime = 1000,
   loop = true,
   style = {},
+  defaultText = '',
 }: TyperProps) => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState(defaultText);
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [writingSpeed, setWritingSpeed] = useState(typingSpeed);
