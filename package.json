@@ -1,6 +1,6 @@
 {
   "name": "react-text-typist",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A React component that simulates human typing on a keyboard",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -18,7 +18,9 @@
     "typist",
     "react-typist",
     "react-component",
-    "react-library"
+    "react-library",
+    "typing effect",
+    "typing"
   ],
   "author": "Brais Cao <braiscao.dev@gmail.com>",
   "license": "MIT",

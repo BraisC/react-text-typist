@@ -14,6 +14,8 @@
 
 A simple React component to create typing animations with multiple sentences.
 
+I you need a typing effect on your app this package may be what you need :)
+
 ## Install
 
 ```shell
