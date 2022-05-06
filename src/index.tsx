@@ -89,7 +89,7 @@ const Typer: React.FC<TyperProps> = ({
 
     if (!refIsDeleting.current && refText.current === fullText && !refIsGoingToDelete.current) {
       refIsGoingToDelete.current = true;
-      timer1.current = setTimeout(() => {
+      timer1.current = window.setTimeout(() => {
         setIsDeleting(true);
         setWritingSpeed(deletingSpeed);
         refIsGoingToDelete.current = false;
@@ -102,11 +102,11 @@ const Typer: React.FC<TyperProps> = ({
 
     if (loop || i !== sentences.length - 1 || refText.current.length !== fullText.length) {
       if (refIsGoingToDelete.current) {
-        timer2.current = setTimeout(() => {
-          refTimer.current = setTimeout(handleType, refWritingSpeed.current);
+        timer2.current = window.setTimeout(() => {
+          refTimer.current = window.setTimeout(handleType, refWritingSpeed.current);
         }, pauseTime);
       } else {
-        refTimer.current = setTimeout(handleType, refWritingSpeed.current);
+        refTimer.current = window.setTimeout(handleType, refWritingSpeed.current);
       }
     } else {
       refIsFinished.current = true;
@@ -114,7 +114,7 @@ const Typer: React.FC<TyperProps> = ({
   }, [deletingSpeed, loop, pauseTime, typingSpeed, sentences]);
 
   useEffect(() => {
-    timer3.current = setTimeout(() => {
+    timer3.current = window.setTimeout(() => {
       if (!mountedRef.current) {
         return;
       }
