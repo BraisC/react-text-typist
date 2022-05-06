@@ -1,6 +1,6 @@
 {
   "name": "react-text-typist",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "A React component that simulates human typing on a keyboard",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
