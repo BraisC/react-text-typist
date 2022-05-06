@@ -59,7 +59,7 @@ Typist accepts some props to customize the component behaviour:
 |   cursorDelay    |    number     | same as startDelay | Delay before showing cursor for first time |    no    |
 |       loop       |    boolean    |        true        |      Choose if you want infinite loop      |    no    |
 |      style       | CSSProperties |         {}         |    Inline CSS to apply to the component    |    no    |
-|    defaultText   |    string     |                    |           Default text to render           |    no    |
+|    defaultText   |    string     |         ''         |  Default text to render, useful with SSR   |    no    |
 
 ## Customization
 
