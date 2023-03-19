@@ -57,8 +57,6 @@ const Typer: React.FC<TyperProps> = ({
   const refIsGoingToDelete = useRef(false);
   const refIsFinished = useRef(false);
 
-  clearTimeout(refTimer.current);
-
   refText.current = text;
   refIsDeleting.current = isDeleting;
   refLoopNum.current = loopNum;
@@ -75,7 +73,6 @@ const Typer: React.FC<TyperProps> = ({
       clearTimeout(timer3.current);
     };
   }, []);
-  console.log('hola');
   const handleType = useCallback(() => {
     const i = refLoopNum.current % sentences.length;
     const fullText = sentences[i];
@@ -85,7 +82,6 @@ const Typer: React.FC<TyperProps> = ({
         ? fullText.substring(0, refText.current.length - 1)
         : fullText.substring(0, refText.current.length + 1)
     );
-
     if (!refIsDeleting.current && refText.current === fullText && !refIsGoingToDelete.current) {
       refIsGoingToDelete.current = true;
       timer1.current = window.setTimeout(() => {
