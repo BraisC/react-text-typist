@@ -12,7 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "allowJs": false,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "declaration": true,
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,

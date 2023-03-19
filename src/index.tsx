@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
-// import PropTypes from 'prop-types';
+import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 
 import './styles.scss';
 
@@ -76,7 +75,7 @@ const Typer: React.FC<TyperProps> = ({
       clearTimeout(timer3.current);
     };
   }, []);
-
+  console.log('hola');
   const handleType = useCallback(() => {
     const i = refLoopNum.current % sentences.length;
     const fullText = sentences[i];
@@ -123,50 +122,27 @@ const Typer: React.FC<TyperProps> = ({
   }, [handleType, startDelay]);
 
   const styledSpan = useMemo(
-    () => ({
+    () =>
+      ({
         opacity: 0,
         visibility: showCursor ? 'visible' : 'hidden',
         color: cursorColor,
         animation: `blink ${cursorBlinkSpeed}ms ${cursorSmooth ? '' : 'steps(1)'} infinite`,
         animationDelay: `${cursorDelay}ms`,
       } as React.CSSProperties),
-      [cursorBlinkSpeed, cursorColor, cursorDelay, cursorSmooth, showCursor]
+    [cursorBlinkSpeed, cursorColor, cursorDelay, cursorSmooth, showCursor]
   );
 
   return (
     <span style={style}>
       <span className={className}>{text}</span>
       {!(refIsFinished.current && hideCursorOnFinish) && (
-        <span
-          className={`typist-cursor ${`${cursorClassName} ${className}`}`}
-          style={styledSpan}
-        >
+        <span className={`typist-cursor ${`${cursorClassName} ${className}`}`} style={styledSpan}>
           |
         </span>
       )}
     </span>
   );
 };
-
-/* Typer.propTypes = {
-  className: PropTypes.string, // so it is compatible with styled-components
-  cursorColor: PropTypes.string,
-  sentences: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  showCursor: PropTypes.bool,
-  typingSpeed: PropTypes.number,
-  deleteSpeed: PropTypes.number,
-  pauseTime: PropTypes.number,
-  loop: PropTypes.bool,
-};
-
-Typer.defaultProps = {
-  className: '',
-  cursorColor: '#000000',
-  showCursor: true,
-  typingSpeed: 80,
-  deleteSpeed: 30,
-  pauseTime: 2000,
-  loop: true,
-}; */
 
 export default Typer;
