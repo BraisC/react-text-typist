@@ -19,6 +19,7 @@ interface TyperProps {
   loop?: boolean;
   style?: React.CSSProperties;
   defaultText?: string;
+  onNonLoopFinish?: () => void;
 }
 
 const Typer: React.FC<TyperProps> = ({
@@ -38,6 +39,7 @@ const Typer: React.FC<TyperProps> = ({
   loop = true,
   style = {},
   defaultText = '',
+  onNonLoopFinish = () => {},
 }: TyperProps) => {
   const [text, setText] = useState(defaultText);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -105,6 +107,7 @@ const Typer: React.FC<TyperProps> = ({
       }
     } else {
       refIsFinished.current = true;
+      onNonLoopFinish()
     }
   }, [deletingSpeed, loop, pauseTime, typingSpeed, sentences]);
 
