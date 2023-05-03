@@ -60,7 +60,7 @@ Typist accepts some props to customize the component behaviour:
 |       loop       |    boolean    |        true        |      Choose if you want infinite loop      |    no    |
 |      style       | CSSProperties |         {}         |    Inline CSS to apply to the component    |    no    |
 |    defaultText   |    string     |         ''         |  Default text to render, useful with SSR   |    no    |
-| onNonLoopFinish  |    Function   |                    |         Callback when loop is false        |    no    |
+|   onTypeFinish   |    Function   |                    |        Callback when finished typing       |    no    |
 
 ## Customization
 
